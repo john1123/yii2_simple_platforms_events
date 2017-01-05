@@ -1,0 +1,1 @@
+# yii2_simple_platforms_events
