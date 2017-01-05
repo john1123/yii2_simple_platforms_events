@@ -30,33 +30,6 @@ class PlatformController extends Controller
         ];
     }
 
-    /**
-     * Lists all Platform models.
-     * @return mixed
-     */
-    public function actionList()
-    {
-        $searchModel = new PlatformSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('list', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Platform model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
     public function actionIndex()
     {
         $query = Platform::find();
@@ -76,4 +49,16 @@ class PlatformController extends Controller
             'pagination' => $pagination,
         ]);
     }
+    public function actionView($id)
+    {
+        /* @var $modelPlatform Platform */
+        $modelPlatform = Platform::find()
+            ->with('events')
+            ->where(['id' => $id])
+            ->one();
+        return $this->render('view', [
+            'platform' => $modelPlatform,
+        ]);
+    }
+
 }

@@ -13,21 +13,14 @@ use yii\helpers\ArrayHelper;
 <div class="event-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-
-    <?= $form->field($model, 'p_id')->dropDownList(ArrayHelper::map($platforms, 'id', 'name'))->label('Выберите имя автора'); ?>
-
-    <?= $form->field($model, 'start_date')->textInput() ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'start_date')->textInput() ?>
+    <?= $form->field($model, 'p_id')->dropDownList(ArrayHelper::map($platforms, 'id', 'name'))->label('Select platform'); ?>
     <?= $form->field($model, 'image')->fileInput() ?>
-
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

@@ -30,21 +30,6 @@ class EventController extends Controller
         ];
     }
 
-    /**
-     * Lists all Event models.
-     * @return mixed
-     */
-    public function actionList()
-    {
-        $searchModel = new EventSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('list', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
     public function actionIndex()
     {
         $query = Event::find();
@@ -62,6 +47,15 @@ class EventController extends Controller
         return $this->render('index', [
             'events' => $events,
             'pagination' => $pagination,
+        ]);
+    }
+
+    public function actionView($id)
+    {
+        /* @var $modelEvent Event */
+        $modelEvent = Event::find()->with('platform')->where(['id'=>$id])->one();
+        return $this->render('view', [
+            'model' => $modelEvent,
         ]);
     }
 }

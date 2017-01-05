@@ -10,6 +10,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+
 
 /**
  * AdminEventController implements the CRUD actions for Event model.
@@ -73,8 +76,11 @@ class AdminEventController extends Controller
             $file = UploadedFile::getInstance($model, 'image');
             if ($file && $file) {
                 $filename = 'uploads/' . $file->baseName . '.' . $file->extension;
-                $model->image = $filename;
                 $file->saveAs($filename);
+
+                Image::thumbnail($filename, 100, 100)
+                    ->save(Yii::getAlias($filename), ['quality' => 80]);
+                $model->image = $filename;
             }
             if ($model->save() ) {
                 return $this->redirect(['view', 'id' => $model->id]);
