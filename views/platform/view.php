@@ -1,6 +1,6 @@
 <div class="row">
-    <div class="col-platform-image-preview pull-left">
-        <img class="img-responsive platform-view" src="/<?= $platform->image?>" alt="<?= $platform->name ?>" title="<?= $platform->name ?>">
+    <div class="col-platform-view-image-wrapper pull-left">
+        <img class="img-responsive" src="/<?= $platform->image?>" alt="<?= $platform->name ?>" title="<?= $platform->name ?>">
     </div>
     <div class="pull-left">
         <h2 class="name"><?= $platform->name ?></h2>

@@ -116,15 +116,36 @@ a.desc:after {
 .col-platform-image-preview {
     width: 950px;
 }
-.event-list-item {
+.thumbnail {
+    overflow: hidden;
+}
+.event-list-image-wrapper {
+    width: 700px;
+    height: 400px;
+    overflow: hidden;
+}
+.event-list-image-wrapper.img {
+    display: block;
     max-width: 700px;
     max-height: 400px;
 }
-.platform-list-item {
+.platform-list-image-wrapper {
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+}
+.platform-list-image-wrapper.img {
+    display: block;
     max-width: 800px;
     max-height: 500px;
 }
-.platform-view {
+.col-platform-view-image-wrapper {
+    width: 900px;
+    height: 350px;
+    overflow: hidden;
+    margin-right: 5px;
+}
+.col-platform-view-image-wrapper img {
     max-width: 900px;
     max-height: 350px;
 }

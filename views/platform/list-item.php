@@ -1,6 +1,8 @@
 <div class="col-md-3 col-sm-6 hero-feature">
     <div class="thumbnail">
-        <img class="img-responsive platform-list-item" src="/<?=$platform->image?>" alt="<?= $platform->name ?>" title="<?= $platform->name ?>>
+        <div class="platform-list-image-wrapper">
+            <img class="img-responsive" src="/<?=$platform->image?>" alt="<?= $platform->name ?>" title="<?= $platform->name ?>">
+        </div>
         <div class="caption">
             <h3><?= $platform->name?></h3>
             <p><?= $platform->description?></p>
