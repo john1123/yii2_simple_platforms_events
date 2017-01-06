@@ -1,7 +1,7 @@
 <?php
  use \yii\widgets\LinkPager;
 ?>
-<h1>Platfotms</h1>
+<h1>Platforms</h1>
 <div class="row">
     <ul>
         <?php foreach ($platforms as $platform): ?>
