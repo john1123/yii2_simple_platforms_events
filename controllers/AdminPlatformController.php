@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use Imagine\Image\Box;
 use Yii;
 use app\models\Platform;
 use app\models\PlatformSearch;
@@ -37,6 +38,9 @@ class AdminPlatformController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $searchModel = new PlatformSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -53,6 +57,9 @@ class AdminPlatformController extends Controller
      */
     public function actionView($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -65,17 +72,22 @@ class AdminPlatformController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $model = new Platform();
 
         if ($model->load(Yii::$app->request->post())) {
 
             $file = UploadedFile::getInstance($model, 'image');
-            if ($file && $file) {
-                $filename = 'uploads/' . $file->baseName . '.' . $file->extension;
+            if ($file) {
+                $filename = 'uploads/' . md5(time()) . '_'. $file->baseName . '.' . $file->extension;
                 $file->saveAs($filename);
 
-                Image::thumbnail($filename, 100, 100)
-                    ->save(Yii::getAlias($filename), ['quality' => 80]);
+                Image::getImagine()
+                    ->open($filename)
+                    ->thumbnail(new Box(900, 350))
+                    ->save($filename, ['quality' => 90]);
                 $model->image = $filename;
             }
             if ($model->save() ) {
@@ -95,6 +107,9 @@ class AdminPlatformController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -114,6 +129,9 @@ class AdminPlatformController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

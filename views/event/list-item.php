@@ -1,6 +1,6 @@
 <div class="col-md-4 portfolio-item">
     <a href="#">
-        <img class="img-responsive" src="/<?php echo $event->image ?>" alt="">
+        <img class="img-responsive event-list-item" src="/<?php echo $event->image ?>" alt="<?= $event->name ?>" title="<?= $event->name ?>><!-- 700x400 -->
     </a>
     <h3><a href="#"><?php echo $event->name ?></a></h3>
     <h4><?php echo $event->start_date ?></h4>

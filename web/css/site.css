@@ -116,3 +116,15 @@ a.desc:after {
 .col-platform-image-preview {
     width: 950px;
 }
+.event-list-item {
+    max-width: 700px;
+    max-height: 400px;
+}
+.platform-list-item {
+    max-width: 800px;
+    max-height: 500px;
+}
+.platform-view {
+    max-width: 900px;
+    max-height: 350px;
+}

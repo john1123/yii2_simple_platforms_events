@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'start_date')->textInput() ?>
+    <?= $form->field($model, 'start_date')->textInput(['placeholder' => 'YYYY-MM-DD HH:II:SS']) ?>
     <?= $form->field($model, 'p_id')->dropDownList(ArrayHelper::map($platforms, 'id', 'name'))->label('Select platform'); ?>
     <?= $form->field($model, 'image')->fileInput() ?>
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Platform;
+use Imagine\Image\Box;
 use Yii;
 use app\models\Event;
 use app\models\EventSearch;
@@ -40,6 +41,9 @@ class AdminEventController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $searchModel = new EventSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -68,19 +72,24 @@ class AdminEventController extends Controller
      */
     public function actionCreate()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $model = new Event();
         $platforms = Platform::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
 
             $file = UploadedFile::getInstance($model, 'image');
-            if ($file && $file) {
-                $filename = 'uploads/' . $file->baseName . '.' . $file->extension;
+            if ($file) {
+                $filename = 'uploads/' . md5(time()) . '_'. $file->baseName . '.' . $file->extension;
                 $file->saveAs($filename);
-
-                Image::thumbnail($filename, 100, 100)
-                    ->save(Yii::getAlias($filename), ['quality' => 80]);
+                Image::getImagine()
+                    ->open($filename)
+                    ->thumbnail(new Box(700, 400))
+                    ->save($filename, ['quality' => 90]);
                 $model->image = $filename;
+
             }
             if ($model->save() ) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -101,6 +110,9 @@ class AdminEventController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -120,6 +132,9 @@ class AdminEventController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/login');
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

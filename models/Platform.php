@@ -31,7 +31,7 @@ class Platform extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name', 'image'], 'string', 'max' => 50],
+            [['name', 'image'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 255],
         ];
     }

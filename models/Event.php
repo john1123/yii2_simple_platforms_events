@@ -34,7 +34,7 @@ class Event extends \yii\db\ActiveRecord
         return [
             [['p_id'], 'integer'],
             [['start_date'], 'safe'],
-            [['name', 'image'], 'string', 'max' => 50],
+            [['name', 'image'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 255],
             [['p_id'], 'exist', 'skipOnError' => true, 'targetClass' => Platform::className(), 'targetAttribute' => ['p_id' => 'id']],
         ];

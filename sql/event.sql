@@ -3,7 +3,7 @@ CREATE TABLE `event` (
 	`p_id` INT(11) NOT NULL,
 	`start_date` TIMESTAMP NULL DEFAULT NULL,
 	`name` VARCHAR(50) NULL DEFAULT NULL,
-	`image` VARCHAR(50) NULL DEFAULT NULL,
+	`image` VARCHAR(100) NULL DEFAULT NULL,
 	`description` VARCHAR(255) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`),
 	INDEX `p_id` (`p_id`),
